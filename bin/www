@@ -1,0 +1,6 @@
+const dotenv = require("dotenv");
+const app = require("../app");
+const port = () => process.env.APP_PORT || process.env.APP_DEFAULT_PORT || 3031;
+
+dotenv.config();
+app(port());

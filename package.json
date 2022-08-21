@@ -1,0 +1,29 @@
+{
+  "name": "expressjs",
+  "version": "1.0.0",
+  "description": "expressjs",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngmthaq/expressjs.git"
+  },
+  "keywords": [
+    "expressjs"
+  ],
+  "author": "ngmthaq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ngmthaq/expressjs/issues"
+  },
+  "homepage": "https://github.com/ngmthaq/expressjs#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  }
+}
