@@ -1,4 +1,4 @@
-# EXPRESSJS for a lightweight server
+# EXPRESS.JS for a lightweight server
 
 ## Setup
 1. Set up enviroment
