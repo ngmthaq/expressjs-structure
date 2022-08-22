@@ -14,7 +14,7 @@ const app = (port) => {
   server.use("/vid", express.static("public/vid"));
 
   // Router configuation
-  libs.autoloaderRoutes(server);
+  libs.routerAutoloader(server);
 
   // Error handler
   server.use(libs.errorLogger);

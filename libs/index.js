@@ -8,9 +8,14 @@ const errorFileLogger = (error) => {
   let today = new Date().setUTCHours(0, 0, 0, 0);
   let now = Date.now();
   let logDir = path.resolve(__dirname, "../bin/logs", `error-log-${today}.md`);
-  let content = `[${now}]: ${error.stack}}\r\n\r\n`;
+  let content = `[${now}]: ${error?.stack || ""}}\r\n\r\n`;
 
-  fs.writeFile(logDir, content, { flag: "a" }, (err) => {});
+  console.error(`Error logger: ${content}`);
+  fs.writeFile(logDir, content, { flag: "a" }, (err) => {
+    if (err) {
+      console.error("Error at fs.writeFile: ", err);
+    }
+  });
 };
 
 /**
@@ -22,8 +27,7 @@ const errorFileLogger = (error) => {
  */
 const errorLogger = (error, request, response, next) => {
   errorFileLogger(error);
-  console.error(`Error: ${error.stack}`);
-  next(error); // calling next middleware
+  next(error); /* calling next middleware */
 };
 
 /**
@@ -33,7 +37,7 @@ const errorLogger = (error, request, response, next) => {
  * @param {*} response
  * @param {*} next
  */
-const errorResponder = (error, request, response, next) => {
+const errorResponder = async (error, request, response, next) => {
   let status = error.status || 500;
   let json = { error: error.message };
   if (process.env.APP_ENVIROMENT === "develop") {
@@ -72,7 +76,7 @@ const appListener = (port) => {
  * Autoloading application routes with version format "/api/version/route"
  * @param {import("express").Express} server
  */
-const autoloaderRoutes = (server) => {
+const routerAutoloader = (server) => {
   const routers = require("../routers");
 
   for (const version in routers) {
@@ -97,5 +101,6 @@ module.exports = {
   errorResponder,
   invalidPathHandler,
   appListener,
-  autoloaderRoutes,
+  routerAutoloader,
+  errorFileLogger,
 };
